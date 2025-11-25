@@ -84,8 +84,20 @@ export const PeoplePage = () => {
         }
 
         case 'died': {
-          const diedA = a.died ?? 0;
-          const diedB = b.died ?? 0;
+          const diedA = a.died;
+          const diedB = b.died;
+
+          if (diedA == null && diedB == null) {
+            return 0;
+          }
+
+          if (diedA == null) {
+            return 1;
+          }
+
+          if (diedB == null) {
+            return -1;
+          }
 
           return diedA - diedB;
         }
@@ -155,14 +167,16 @@ export const PeoplePage = () => {
               )}
               {!loading && !errorMessage && filteredPeople.length === 0 && (
                 <p data-cy="noPeopleMessage">
-                  There are no people on the server
+                  There are no people matching the current search criteria
                 </p>
               )}
+
               {!loading && !errorMessage && filteredPeople.length > 0 && (
                 <PeopleTable
                   people={sortedPeople}
                   selectedPersonSlug={selectedPersonSlug}
                   renderParent={renderParent}
+                  search={search}
                 />
               )}
             </div>

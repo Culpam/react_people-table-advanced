@@ -8,6 +8,7 @@ type Props = {
   people: Person[];
   selectedPersonSlug: string;
   renderParent: (name: string | null) => React.ReactNode;
+  search: string;
 };
 
 type SortField = 'name' | 'sex' | 'born' | 'died';
@@ -16,6 +17,7 @@ export const PeopleTable: React.FC<Props> = ({
   people,
   selectedPersonSlug,
   renderParent,
+  search,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sort = searchParams.get('sort');
@@ -135,7 +137,7 @@ export const PeopleTable: React.FC<Props> = ({
             })}
           >
             <td>
-              <PersonLink person={person} />
+              <PersonLink person={person} search={search} />
             </td>
 
             <td>{person.sex}</td>
