@@ -7,7 +7,9 @@ const getLinkClass = ({ isActive }: { isActive: boolean }) =>
 export const Navbar = () => {
   const location = useLocation();
 
-  const peopleSearch = location.pathname === '/people' ? location.search : '';
+  const peopleSearch = location.pathname.startsWith('/people')
+    ? location.search
+    : '';
 
   return (
     <nav
